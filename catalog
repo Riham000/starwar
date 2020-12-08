@@ -1,0 +1,129 @@
+
+
+const ulElementName = document.querySelector('.name');
+const ulElementDetails = document.querySelector('.details');
+const secElement = document.querySelectorAll('section');
+
+
+
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+const char = 'https://swapi.dev/api/people/';
+const char1 = 'https://swapi.dev/api/planets/';
+
+
+function getCharacter(url, callback) {
+
+    fetch(url)
+        .then(response => response.json())
+        .then(callback)
+        .catch(error => console.log(error));
+
+}
+
+
+function charList(data) {
+
+
+    const sorce = data.results
+
+    for (let i = 0; i < sorce.length; i++) {
+
+        const starWars = sorce[i];
+        const charName = starWars.name;
+        const charHeight = starWars.height;
+        const charMass = starWars.mass;
+        const charHair = starWars.hair_color;
+        const charSkin = starWars.skin_color;
+        const charEye = starWars.eye_color;
+        const charBirth = starWars.birth_year;
+        const charGender = starWars.gender;
+
+
+        const liElement = document.createElement('li');
+        liElement.textContent = charName;
+        ulElementName.appendChild(liElement);
+        liElement.addEventListener('click', getData);
+
+
+
+
+        function getData(evt) {
+
+            removeAllChildNodes(ulElementDetails);
+            const liElement = document.createElement('li');
+            liElement.textContent = charName;
+
+            const liDetails = document.createElement('li');
+            liDetails.textContent = ` Height: ${charHeight}cm`;
+            const liDetailsM = document.createElement('li');
+            liDetailsM.textContent = ` Mass: ${charMass}Kg`;
+            const liDetailsHair = document.createElement('li');
+            liDetailsHair.textContent = ` Hair Color: ${charHair}`;
+            const liDetailsSkin = document.createElement('li');
+            liDetailsSkin.textContent = ` Skin Color: ${charSkin}`;
+            const liDetailsEye = document.createElement('li');
+            liDetailsEye.textContent = ` Eye Color: ${charEye}`;
+            const liDetailsBirth = document.createElement('li');
+            liDetailsBirth.textContent = ` Birth_year: ${charBirth}`;
+            const liDetailsGender = document.createElement('li');
+            liDetailsGender.textContent = ` Gender: ${charGender}`;
+
+            ulElementDetails.appendChild(liElement);
+            ulElementDetails.appendChild(liDetails);
+            ulElementDetails.appendChild(liDetailsM);
+            ulElementDetails.appendChild(liDetailsHair);
+            ulElementDetails.appendChild(liDetailsSkin);
+            ulElementDetails.appendChild(liDetailsEye);
+            ulElementDetails.appendChild(liDetailsBirth);
+            ulElementDetails.appendChild(liDetailsGender);
+
+
+        }
+
+    }
+
+
+}
+
+
+getCharacter(char, charList)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
